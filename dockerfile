@@ -1,23 +1,26 @@
-# Base Image
+# Dockerfile
 FROM node:18
 
-# Set Working Directory
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and related config files first to leverage Docker layer caching
-COPY package.json package-lock.json remix.config.js tsconfig.json ./
+# Copy package files
+COPY package*.json ./
+COPY vite.config.ts ./
+COPY remix.config.js ./
+COPY tsconfig.json ./
 
-# Install Dependencies
+# Install dependencies
 RUN npm install
 
-# Copy Entire App Source
+# Copy app source
 COPY . .
 
-# Build the App
+# Build the app
 RUN npm run build
 
-# Expose Production Port
+# Expose the production port
 EXPOSE 3000
 
-# Start the Production Server
+# Start the Remix production server
 CMD ["npm", "run", "start"]
