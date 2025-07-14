@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply bg-white dark:bg-gray-950;
+
+  @media (prefers-color-scheme: light) {
+    color-scheme: light;
+  }
+}
+
+/* Hide scrollbar for popup forms */
+.popup-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.popup-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Glassmorphic enhancements */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.glass-gold-tint {
+  background: linear-gradient(135deg, rgba(184, 134, 11, 0.1), rgba(255, 255, 255, 0.05), rgba(59, 130, 246, 0.1));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* Enhanced focus states for glassmorphic inputs */
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(184, 134, 11, 0.6);
+  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.3), 0 4px 16px rgba(184, 134, 11, 0.2);
+}
+
+/* Custom select option styles for better contrast */
+select, select option {
+  background-color: #1a202c; /* dark gray */
+  color: #fff;
+}
+
+/* Custom radio button styling for better visibility */
+input[type="radio"] {
+  accent-color: #B8860B; /* law-gold */
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+input[type="radio"]:checked {
+  accent-color: #B8860B; /* law-gold */
+  background-color: #B8860B;
+  border-color: #B8860B;
+  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.3);
+}
+
+input[type="radio"]:checked::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+input[type="radio"]:hover {
+  border-color: rgba(184, 134, 11, 0.6);
+  background-color: rgba(184, 134, 11, 0.1);
+}
+
+input[type="radio"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.5);
+}
