@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "@remix-run/react";
 import Header from "./Header";
 import Popup from "./ui/Popup";
+import Footer from "./ui/Footer";
 import { ASSETS, Z_INDEX } from "../lib/constants";
 import type {
   UserType,
@@ -107,24 +108,25 @@ export function HomePage() {
 
   return (
     <>
-      <div className="relative w-full min-h-screen overflow-hidden font-sans">
-        {/* Background Video */}
-        <video
-          autoPlay
-          muted
-          loop
-          className={`fixed top-0 left-0 w-full h-full object-cover z-[${Z_INDEX.BACKGROUND}]`}
-          src={ASSETS.VIDEO}
-        />
-        
-        {/* Background Overlay */}
-        <div className="fixed top-0 left-0 w-full h-full bg-law-dark/30 z-0 pointer-events-none" />
+      {/* Background Video - Full Screen */}
+      <video
+        autoPlay
+        muted
+        loop
+        className={`fixed top-0 left-0 w-full h-full object-cover z-[${Z_INDEX.BACKGROUND}]`}
+        src={ASSETS.VIDEO}
+      />
 
+      {/* Background Overlay */}
+      <div className="fixed top-0 left-0 w-full h-full bg-law-dark/30 z-0 pointer-events-none" />
+
+      {/* Page Layout Container */}
+      <div className="video-layout-container relative w-full font-sans">
         {/* Header */}
         <Header onViewMoreClick={handleViewMoreClick} />
 
-        {/* Main Content */}
-        <main className="flex w-full justify-center min-h-screen relative items-center z-10 pt-24 lg:pt-32">
+        {/* Main Content - Takes up available space */}
+        <main className="video-layout-main flex w-full justify-center relative items-center z-10 pt-24 lg:pt-32 pb-8">
           <section className="w-full max-w-fit px-4 sm:px-8 md:px-12 lg:px-16 py-0 flex flex-col justify-center items-center z-20 relative">
             {/* Title Container */}
             <div className="mb-8 text-center">
@@ -214,38 +216,39 @@ export function HomePage() {
           </section>
         </main>
 
-        {/* Floating Features Button */}
-        <button
-          onClick={handleFeaturesClick}
-          className="fixed bottom-6 right-6 z-40 w-14 h-14 bg-gradient-to-r from-law-gold to-law-gold/90 text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center group"
-          aria-label="View Features"
-        >
-          <svg 
-            className="w-6 h-6 transition-transform group-hover:rotate-12" 
-            fill="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-        </button>
-
-        {/* Popup */}
-        <Popup
-          isOpen={showPopup}
-          onClose={closePopup}
-          type={popupType}
-          userType={userType}
-          isNotInterested={isNotInterested}
-          feedbackSubmitted={feedbackSubmitted}
-          onUserTypeClick={handleUserTypeClick}
-          onNotInterestedClick={handleNotInterestedClick}
-          onFeaturesClick={handleFeaturesClick}
-          onFeedbackClick={handleFeedbackClick}
-          onAdminClick={handleAdminClick}
-        />
+        {/* Footer - Positioned after main content */}
+        <Footer className="video-layout-footer" />
       </div>
-      {/* Admin Link - bottom right */}
-      
+
+      {/* Floating Features Button */}
+      <button
+        onClick={handleFeaturesClick}
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 bg-gradient-to-r from-law-gold to-law-gold/90 text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center group"
+        aria-label="View Features"
+      >
+        <svg
+          className="w-6 h-6 transition-transform group-hover:rotate-12"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      </button>
+
+      {/* Popup */}
+      <Popup
+        isOpen={showPopup}
+        onClose={closePopup}
+        type={popupType}
+        userType={userType}
+        isNotInterested={isNotInterested}
+        feedbackSubmitted={feedbackSubmitted}
+        onUserTypeClick={handleUserTypeClick}
+        onNotInterestedClick={handleNotInterestedClick}
+        onFeaturesClick={handleFeaturesClick}
+        onFeedbackClick={handleFeedbackClick}
+        onAdminClick={handleAdminClick}
+      />
     </>
   );
 }

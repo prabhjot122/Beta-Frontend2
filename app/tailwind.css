@@ -23,6 +23,43 @@ body {
   scrollbar-width: none;  /* Firefox */
 }
 
+/* Video layout management utilities */
+.video-layout-container {
+  /* Ensure the container takes full viewport height */
+  min-height: 100vh;
+  /* Use flexbox to manage layout */
+  display: flex;
+  flex-direction: column;
+}
+
+.video-layout-main {
+  /* Main content takes available space */
+  flex: 1;
+  /* Ensure minimum height for content visibility */
+  min-height: calc(100vh - 200px); /* Reserve space for footer */
+}
+
+.video-layout-footer {
+  /* Footer is positioned after content */
+  flex-shrink: 0;
+  /* Ensure footer is above video */
+  position: relative;
+  z-index: 20;
+}
+
+/* Responsive video layout adjustments */
+@media (max-height: 600px) {
+  .video-layout-main {
+    min-height: calc(100vh - 150px); /* Smaller footer space on short screens */
+  }
+}
+
+@media (max-height: 400px) {
+  .video-layout-main {
+    min-height: calc(100vh - 100px); /* Even smaller footer space on very short screens */
+  }
+}
+
 /* Glassmorphic enhancements */
 .glass-effect {
   background: rgba(255, 255, 255, 0.1);

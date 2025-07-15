@@ -12,3 +12,4 @@ export { default as FeedbackForm } from './ui/FeedbackForm';
 export { default as FeaturesContent } from './ui/FeaturesContent';
 export { default as ViewMoreContent } from './ui/ViewMoreContent';
 export { default as ThankYouContent } from './ui/ThankYouContent';
+export { default as Footer } from './ui/Footer';
