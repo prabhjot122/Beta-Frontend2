@@ -128,7 +128,7 @@ export function HomePage() {
           <section className="w-full max-w-fit px-4 sm:px-8 md:px-12 lg:px-16 py-0 flex flex-col justify-center items-center z-20 relative">
             {/* Title Container */}
             <div className="mb-8 text-center">
-              <h1 className="text-white font-merriweather text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight m-0 w-full max-w-[600px] lg:max-w-[650px] text-center px-4">
+              <h1 className="text-white font-merriweather text-3xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight m-0 w-full max-w-[600px] lg:max-w-[650px] text-center px-4">
                 <span>Join the LawVriksh Beta</span>
               </h1>
             </div>
@@ -173,12 +173,7 @@ export function HomePage() {
             {/* Description Container */}
             <div className="mb-10">
               <p className="text-white font-source-sans-pro font-light text-sm sm:text-sm leading-relaxed m-0 text-center w-full max-w-[620px] px-4">
-                Lawvriksh isn&apos;t just a platform—it&apos;s your breakthrough. Dive
-                into the law with passion and purpose, transform curiosity into
-                confidence, and let your voice amplify justice. Share your work
-                with pride, build a digital presence that demands attention, and
-                join a movement where every insight sparks change. This is where
-                learners rise, leaders shine, and your impact begins.
+              Lawvriksh isn&apos;t just a platform—it&apos;s your breakthrough. Dive into the law with passion and purpose, turning curiosity into confidence and letting your voice amplify justice. Share your work, build a powerful digital presence, and join a movement where every insight sparks change. This is where learners rise, leaders shine, and your impact begins.
               </p>
             </div>
 
@@ -190,12 +185,12 @@ export function HomePage() {
 
               <div className="flex flex-col items-center gap-5 w-full">
                 {/* User Type Row */}
-                <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center w-full">
+                <div className="flex flex-row items-center gap-3 sm:gap-4 justify-center w-full">
                   <button
                     className="flex w-40 sm:w-48 md:w-56 lg:w-64 h-10 sm:h-11 md:h-12 px-4 sm:px-6 items-center justify-center rounded-[4px]  bg-[#D4AF37] text-[#1B1B1B] font-montserrat font-medium text-sm sm:text-base md:text-lg cursor-pointer transition-all duration-200 hover:opacity-100 hover:scale-105 relative before:absolute before:inset-[-3px] before:rounded-full before:z-[-1] before:brightness-100 before:contrast-125"
                     onClick={() => handleUserTypeClick('user')}
                   >
-                    Join as User
+                    User
                   </button>
                   <button
                     className="flex w-40 sm:w-48 md:w-56 lg:w-64 h-10 sm:h-11 md:h-12 px-4 sm:px-6 items-center justify-center rounded-[4px]  bg-[#D4AF37] text-[#1B1B1B] font-montserrat font-medium text-sm sm:text-base md:text-lg cursor-pointer transition-all duration-200 hover:opacity-100 hover:scale-105 relative before:absolute before:inset-[-3px] before:rounded-full before:z-[-1] before:brightness-100 before:contrast-125"
@@ -209,7 +204,7 @@ export function HomePage() {
 
                 {/* Not Interested Button */}
                 <button
-                  className="flex w-40 sm:w-48 md:w-56 lg:w-64 h-10 sm:h-11 md:h-12 px-4 sm:px-6 items-center justify-center rounded-[4px] bg-[#1B1B1B]  text-[#D4AF37] font-montserrat font-medium text-sm sm:text-base md:text-lg cursor-pointer transition-all duration-200 hover:opacity-80 hover:scale-105"
+                  className="flex w-48 sm:w-48 md:w-56 lg:w-64 h-10 sm:h-11 md:h-12 px-4 sm:px-6 items-center justify-center rounded-[4px] bg-[#1B1B1B]  text-[#D4AF37] font-montserrat font-medium text-sm sm:text-base md:text-lg cursor-pointer transition-all duration-200 hover:opacity-80 hover:scale-105"
                   onClick={handleNotInterestedClick}
                 >
                   Not found Interest
@@ -250,13 +245,7 @@ export function HomePage() {
         />
       </div>
       {/* Admin Link - bottom right */}
-      <a
-        href="/admin"
-        className="fixed bottom-4 right-4 text-xs text-gray-500 hover:text-blue-600 underline z-50"
-        style={{ pointerEvents: 'auto' }}
-      >
-        Admin
-      </a>
+      
     </>
   );
 }

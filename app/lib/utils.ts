@@ -34,8 +34,8 @@ export function validatePhone(phone: string): string | null {
     return 'Phone number is required';
   }
   // Basic phone validation - can be enhanced based on requirements
-  const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-  if (!phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''))) {
+  const phoneRegex = /^[+]?([1-9][\d]{0,15})$/;
+  if (!phoneRegex.test(phone.replace(/[\s\-()]/g, ''))) {
     return 'Please provide a valid phone number';
   }
   return null;
@@ -67,7 +67,7 @@ export function validateConditionalField(
 }
 
 // Debounce utility for form inputs
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
@@ -111,7 +111,7 @@ export const storage = {
     }
   },
   
-  set: (key: string, value: any) => {
+  set: (key: string, value: unknown) => {
     if (typeof window === 'undefined') return;
     try {
       window.localStorage.setItem(key, JSON.stringify(value));
@@ -133,10 +133,10 @@ export const storage = {
 // Constants for styling
 export const POPUP_STYLES = {
   overlay: "fixed inset-0 bg-gradient-to-br from-law-dark/60 via-black/50 to-blue-900/40 flex items-center justify-center z-50 backdrop-blur-xl p-4",
-  container: " backdrop-blur-2xl rounded-3xl p-6 sm:p-8 md:p-10 max-w-lg w-full max-h-[90vh] sm:max-h-[80vh] overflow-y-auto popup-scroll relative shadow-2xl border border-white/20",
+  container: "backdrop-blur-2xl rounded-3xl p-6 sm:p-8 md:p-10 max-w-lg w-full max-h-[90vh] sm:max-h-[80vh] overflow-y-auto popup-scroll relative shadow-2xl border border-white/20 pt-14 sm:pt-0", // Added pt-14 for mobile top padding
   containerBorder: "before:absolute before:inset-[-1px]  before:rounded-3xl before:z-[-1] before:blur-sm",
   close: "absolute top-4 right-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full w-8 h-8 flex items-center justify-center text-lg cursor-pointer text-white/80 hover:text-white hover:bg-white/20 transition-all font-montserrat hover:scale-110",
-  title: "bg-gradient-to-r from-law-gold via-yellow-300 to-law-gold bg-clip-text text-transparent font-merriweather font-bold text-2xl sm:text-3xl mb-6 sm:mb-8 text-center drop-shadow-lg",
+  title: "bg-gradient-to-r from-law-gold via-yellow-300 to-law-gold bg-clip-text text-transparent font-merriweather font-bold text-2xl sm:text-3xl mb-6 sm:mb-8 text-center drop-shadow-lg mt-0 sm:mt-0", // Ensure no extra top margin
   form: "flex flex-col gap-5 sm:gap-6",
   formGroup: "flex flex-col gap-2.5",
   label: "font-montserrat font-semibold text-sm sm:text-base text-white/90 tracking-wide drop-shadow-sm",

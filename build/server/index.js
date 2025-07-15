@@ -222,10 +222,12 @@ function Header({ onViewMoreClick }) {
 }
 const POPUP_STYLES = {
   overlay: "fixed inset-0 bg-gradient-to-br from-law-dark/60 via-black/50 to-blue-900/40 flex items-center justify-center z-50 backdrop-blur-xl p-4",
-  container: " backdrop-blur-2xl rounded-3xl p-6 sm:p-8 md:p-10 max-w-lg w-full max-h-[90vh] sm:max-h-[80vh] overflow-y-auto popup-scroll relative shadow-2xl border border-white/20",
+  container: "backdrop-blur-2xl rounded-3xl p-6 sm:p-8 md:p-10 max-w-lg w-full max-h-[90vh] sm:max-h-[80vh] overflow-y-auto popup-scroll relative shadow-2xl border border-white/20 pt-14 sm:pt-0",
+  // Added pt-14 for mobile top padding
   containerBorder: "before:absolute before:inset-[-1px]  before:rounded-3xl before:z-[-1] before:blur-sm",
   close: "absolute top-4 right-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full w-8 h-8 flex items-center justify-center text-lg cursor-pointer text-white/80 hover:text-white hover:bg-white/20 transition-all font-montserrat hover:scale-110",
-  title: "bg-gradient-to-r from-law-gold via-yellow-300 to-law-gold bg-clip-text text-transparent font-merriweather font-bold text-2xl sm:text-3xl mb-6 sm:mb-8 text-center drop-shadow-lg",
+  title: "bg-gradient-to-r from-law-gold via-yellow-300 to-law-gold bg-clip-text text-transparent font-merriweather font-bold text-2xl sm:text-3xl mb-6 sm:mb-8 text-center drop-shadow-lg mt-0 sm:mt-0",
+  // Ensure no extra top margin
   form: "flex flex-col gap-5 sm:gap-6",
   formGroup: "flex flex-col gap-2.5",
   label: "font-montserrat font-semibold text-sm sm:text-base text-white/90 tracking-wide drop-shadow-sm",
@@ -1739,10 +1741,10 @@ function FeedbackForm({ onClose, onSuccess }) {
       ". ",
       label
     ] }),
-    /* @__PURE__ */ jsx("div", { className: "flex gap-4 flex-wrap mb-3", children: RATING_SCALE.map((num) => /* @__PURE__ */ jsxs(
+    /* @__PURE__ */ jsx("div", { className: "custom-rating-radio-group", children: RATING_SCALE.map((num) => /* @__PURE__ */ jsxs(
       "label",
       {
-        className: `flex items-center gap-1 cursor-pointer text-sm transition-all backdrop-blur-sm rounded-lg px-2 py-1 border ${formData[name] === num ? "bg-law-gold/20 border-law-gold/50 text-yellow-300 font-semibold shadow-lg" : "text-white/80 hover:text-white bg-white/5 border-white/10 hover:bg-white/10"}`,
+        className: `custom-rating-radio${formData[name] === num ? " selected" : ""}`,
         children: [
           /* @__PURE__ */ jsx(
             "input",
@@ -1752,10 +1754,10 @@ function FeedbackForm({ onClose, onSuccess }) {
               value: num.toString(),
               checked: formData[name] === num,
               onChange: handleInputChange,
-              className: "w-4 h-4"
+              className: "custom-rating-radio-input"
             }
           ),
-          /* @__PURE__ */ jsxs("span", { className: "font-medium", children: [
+          /* @__PURE__ */ jsxs("span", { className: "custom-rating-radio-label", children: [
             num,
             " - ",
             RATING_LABELS[num]
@@ -1791,8 +1793,8 @@ function FeedbackForm({ onClose, onSuccess }) {
       /* @__PURE__ */ jsxs("div", { className: "border-b border-white/20 pb-6 mb-6", children: [
         /* @__PURE__ */ jsx("h3", { className: "bg-gradient-to-r from-law-gold via-yellow-300 to-law-gold bg-clip-text text-transparent font-merriweather font-bold text-xl mb-3 drop-shadow-lg", children: "Digital Presence" }),
         renderRatingQuestion("digital_work_showcase_effectiveness", "How effectively are you able to showcase your digital work online?", 1),
-        /* @__PURE__ */ jsxs("div", { className: POPUP_STYLES.formGroup, children: [
-          /* @__PURE__ */ jsx("label", { className: "block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm", children: "2. Do you think legal persons are getting enough recognition online?" }),
+        /* @__PURE__ */ jsx("div", { className: POPUP_STYLES.formGroup, children: /* @__PURE__ */ jsxs("fieldset", { children: [
+          /* @__PURE__ */ jsx("legend", { className: "block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm", children: "2. Do you think legal persons are getting enough recognition online?" }),
           /* @__PURE__ */ jsx("div", { className: "flex gap-4 flex-wrap mb-3", children: YES_NO_OPTIONS.map((option) => /* @__PURE__ */ jsxs("label", { className: "flex items-center gap-1 cursor-pointer text-sm text-white/80 hover:text-white transition-colors bg-white/5 backdrop-blur-sm rounded-lg px-2 py-1 border border-white/10 hover:bg-white/10", children: [
             /* @__PURE__ */ jsx(
               "input",
@@ -1807,13 +1809,13 @@ function FeedbackForm({ onClose, onSuccess }) {
             ),
             /* @__PURE__ */ jsx("span", { children: option.label })
           ] }, option.value)) })
-        ] }),
+        ] }) }),
         renderRatingQuestion("digital_work_sharing_difficulty", "What level of difficulty do you face while sharing your digital work online? (1: Least, 5: Most)", 3)
       ] }),
       /* @__PURE__ */ jsxs("div", { className: "border-b border-white/20 pb-6 mb-6", children: [
         /* @__PURE__ */ jsx("h3", { className: "bg-gradient-to-r from-law-gold via-yellow-300 to-law-gold bg-clip-text text-transparent font-merriweather font-bold text-xl mb-3 drop-shadow-lg", children: "Blogging and Sharing Insights" }),
-        /* @__PURE__ */ jsxs("div", { className: POPUP_STYLES.formGroup, children: [
-          /* @__PURE__ */ jsx("label", { className: "block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm", children: "4. Do you write blogs regularly?" }),
+        /* @__PURE__ */ jsx("div", { className: POPUP_STYLES.formGroup, children: /* @__PURE__ */ jsxs("fieldset", { children: [
+          /* @__PURE__ */ jsx("legend", { className: "block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm", children: "4. Do you write blogs regularly?" }),
           /* @__PURE__ */ jsx("div", { className: "flex gap-4 flex-wrap mb-3", children: YES_NO_OPTIONS.map((option) => /* @__PURE__ */ jsxs("label", { className: "flex items-center gap-1 cursor-pointer text-sm text-white/80 hover:text-white transition-colors bg-white/5 backdrop-blur-sm rounded-lg px-2 py-1 border border-white/10 hover:bg-white/10", children: [
             /* @__PURE__ */ jsx(
               "input",
@@ -1828,9 +1830,9 @@ function FeedbackForm({ onClose, onSuccess }) {
             ),
             /* @__PURE__ */ jsx("span", { children: option.label })
           ] }, option.value)) })
-        ] }),
-        /* @__PURE__ */ jsxs("div", { className: POPUP_STYLES.formGroup, children: [
-          /* @__PURE__ */ jsx("label", { className: "block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm", children: "5. How often do you use AI tools to assist in writing blogs?" }),
+        ] }) }),
+        /* @__PURE__ */ jsx("div", { className: POPUP_STYLES.formGroup, children: /* @__PURE__ */ jsxs("fieldset", { children: [
+          /* @__PURE__ */ jsx("legend", { className: "block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm", children: "5. How often do you use AI tools to assist in writing blogs?" }),
           /* @__PURE__ */ jsx("div", { className: "flex gap-4 flex-wrap mb-3", children: AI_TOOLS_FREQUENCY_OPTIONS.map((option) => /* @__PURE__ */ jsxs("label", { className: "flex items-center gap-1 cursor-pointer text-sm text-white/80 hover:text-white transition-colors bg-white/5 backdrop-blur-sm rounded-lg px-2 py-1 border border-white/10 hover:bg-white/10", children: [
             /* @__PURE__ */ jsx(
               "input",
@@ -1845,7 +1847,7 @@ function FeedbackForm({ onClose, onSuccess }) {
             ),
             /* @__PURE__ */ jsx("span", { children: option.label })
           ] }, option.value)) })
-        ] }),
+        ] }) }),
         renderRatingQuestion("blogging_tools_familiarity", "How familiar are you with different blogging tools available in the market?", 6)
       ] }),
       /* @__PURE__ */ jsxs("div", { children: [
@@ -2112,7 +2114,7 @@ function Popup({
       children: /* @__PURE__ */ jsxs(
         "div",
         {
-          className: `${POPUP_STYLES.container} ${POPUP_STYLES.containerBorder} ${isLargePopup ? "max-w-4xl max-h-[95vh] sm:max-h-[90vh]" : ""}`,
+          className: `${POPUP_STYLES.container} ${POPUP_STYLES.containerBorder} ${isLargePopup ? "max-w-4xl max-h-[95vh] sm:max-h-[90vh]" : ""} max-h-[70vh] sm:max-h-[90vh] overflow-y-auto`,
           onClick: (e) => e.stopPropagation(),
           role: "presentation",
           tabIndex: -1,
@@ -2196,129 +2198,118 @@ function HomePage() {
     setIsNotInterested(false);
     setFeedbackSubmitted(false);
   }, [trackEvent, popupType]);
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
-    /* @__PURE__ */ jsxs("div", { className: "relative w-full min-h-screen overflow-hidden font-sans", children: [
-      /* @__PURE__ */ jsx(
-        "video",
-        {
-          autoPlay: true,
-          muted: true,
-          loop: true,
-          className: `fixed top-0 left-0 w-full h-full object-cover z-[${Z_INDEX.BACKGROUND}]`,
-          src: ASSETS.VIDEO
-        }
-      ),
-      /* @__PURE__ */ jsx("div", { className: "fixed top-0 left-0 w-full h-full bg-law-dark/30 z-0 pointer-events-none" }),
-      /* @__PURE__ */ jsx(Header, { onViewMoreClick: handleViewMoreClick }),
-      /* @__PURE__ */ jsx("main", { className: "flex w-full justify-center min-h-screen relative items-center z-10 pt-24 lg:pt-32", children: /* @__PURE__ */ jsxs("section", { className: "w-full max-w-fit px-4 sm:px-8 md:px-12 lg:px-16 py-0 flex flex-col justify-center items-center z-20 relative", children: [
-        /* @__PURE__ */ jsx("div", { className: "mb-8 text-center", children: /* @__PURE__ */ jsx("h1", { className: "text-white font-merriweather text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight m-0 w-full max-w-[600px] lg:max-w-[650px] text-center px-4", children: /* @__PURE__ */ jsx("span", { children: "Join the LawVriksh Beta" }) }) }),
-        /* @__PURE__ */ jsx("div", { className: "mb-6 text-center w-full", children: /* @__PURE__ */ jsxs("p", { className: "text-white font-normal italic text-base align-middle sm:text-xl leading-relaxed m-0 text-center w-full px-4", children: [
-          "build your legal digital presence with",
-          " ",
-          /* @__PURE__ */ jsxs("span", { className: "relative inline align-baseline", style: { verticalAlign: "baseline" }, children: [
-            /* @__PURE__ */ jsx(
-              "span",
-              {
-                className: `text-[#D4AF37] font-medium transition-all duration-500 ease-in-out ${isAnimating ? "opacity-0 transform -translate-y-3 scale-90 blur-sm" : "opacity-100 transform translate-y-0 scale-100 blur-none"}`,
-                style: {
-                  display: "inline",
-                  transformOrigin: "center baseline",
-                  filter: isAnimating ? "blur(2px)" : "blur(0px)",
-                  verticalAlign: "baseline",
-                  lineHeight: "inherit"
-                },
-                children: currentText
+  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsxs("div", { className: "relative w-full min-h-screen overflow-hidden font-sans", children: [
+    /* @__PURE__ */ jsx(
+      "video",
+      {
+        autoPlay: true,
+        muted: true,
+        loop: true,
+        className: `fixed top-0 left-0 w-full h-full object-cover z-[${Z_INDEX.BACKGROUND}]`,
+        src: ASSETS.VIDEO
+      }
+    ),
+    /* @__PURE__ */ jsx("div", { className: "fixed top-0 left-0 w-full h-full bg-law-dark/30 z-0 pointer-events-none" }),
+    /* @__PURE__ */ jsx(Header, { onViewMoreClick: handleViewMoreClick }),
+    /* @__PURE__ */ jsx("main", { className: "flex w-full justify-center min-h-screen relative items-center z-10 pt-24 lg:pt-32", children: /* @__PURE__ */ jsxs("section", { className: "w-full max-w-fit px-4 sm:px-8 md:px-12 lg:px-16 py-0 flex flex-col justify-center items-center z-20 relative", children: [
+      /* @__PURE__ */ jsx("div", { className: "mb-8 text-center", children: /* @__PURE__ */ jsx("h1", { className: "text-white font-merriweather text-3xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight m-0 w-full max-w-[600px] lg:max-w-[650px] text-center px-4", children: /* @__PURE__ */ jsx("span", { children: "Join the LawVriksh Beta" }) }) }),
+      /* @__PURE__ */ jsx("div", { className: "mb-6 text-center w-full", children: /* @__PURE__ */ jsxs("p", { className: "text-white font-normal italic text-base align-middle sm:text-xl leading-relaxed m-0 text-center w-full px-4", children: [
+        "build your legal digital presence with",
+        " ",
+        /* @__PURE__ */ jsxs("span", { className: "relative inline align-baseline", style: { verticalAlign: "baseline" }, children: [
+          /* @__PURE__ */ jsx(
+            "span",
+            {
+              className: `text-[#D4AF37] font-medium transition-all duration-500 ease-in-out ${isAnimating ? "opacity-0 transform -translate-y-3 scale-90 blur-sm" : "opacity-100 transform translate-y-0 scale-100 blur-none"}`,
+              style: {
+                display: "inline",
+                transformOrigin: "center baseline",
+                filter: isAnimating ? "blur(2px)" : "blur(0px)",
+                verticalAlign: "baseline",
+                lineHeight: "inherit"
+              },
+              children: currentText
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "span",
+            {
+              className: `absolute inset-0 transition-all duration-300 ease-out ${isAnimating ? "opacity-20 transform translate-y-1" : "opacity-0 transform translate-y-0"}`,
+              style: {
+                background: "linear-gradient(45deg, rgba(212, 175, 55, 0.3), rgba(255, 255, 255, 0.1))",
+                filter: "blur(1px)"
               }
-            ),
-            /* @__PURE__ */ jsx(
-              "span",
-              {
-                className: `absolute inset-0 transition-all duration-300 ease-out ${isAnimating ? "opacity-20 transform translate-y-1" : "opacity-0 transform translate-y-0"}`,
-                style: {
-                  background: "linear-gradient(45deg, rgba(212, 175, 55, 0.3), rgba(255, 255, 255, 0.1))",
-                  filter: "blur(1px)"
-                }
-              }
-            )
-          ] })
-        ] }) }),
-        /* @__PURE__ */ jsx("div", { className: "mb-10", children: /* @__PURE__ */ jsx("p", { className: "text-white font-source-sans-pro font-light text-sm sm:text-sm leading-relaxed m-0 text-center w-full max-w-[620px] px-4", children: "Lawvriksh isn't just a platform—it's your breakthrough. Dive into the law with passion and purpose, transform curiosity into confidence, and let your voice amplify justice. Share your work with pride, build a digital presence that demands attention, and join a movement where every insight sparks change. This is where learners rise, leaders shine, and your impact begins." }) }),
-        /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center gap-6 max-w-fit w-full", children: [
-          /* @__PURE__ */ jsx("h2", { className: "bg-gold-texture bg-cover bg-center bg-clip-text text-transparent font-montserrat font-normal text-xl sm:text-2xl md:text-3xl leading-tight m-0 text-center w-full px-4", children: "Join Our Waiting List :" }),
-          /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center gap-5 w-full", children: [
-            /* @__PURE__ */ jsxs("div", { className: "flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center w-full", children: [
-              /* @__PURE__ */ jsx(
-                "button",
-                {
-                  className: "flex w-40 sm:w-48 md:w-56 lg:w-64 h-10 sm:h-11 md:h-12 px-4 sm:px-6 items-center justify-center rounded-[4px]  bg-[#D4AF37] text-[#1B1B1B] font-montserrat font-medium text-sm sm:text-base md:text-lg cursor-pointer transition-all duration-200 hover:opacity-100 hover:scale-105 relative before:absolute before:inset-[-3px] before:rounded-full before:z-[-1] before:brightness-100 before:contrast-125",
-                  onClick: () => handleUserTypeClick("user"),
-                  children: "Join as User"
-                }
-              ),
-              /* @__PURE__ */ jsx(
-                "button",
-                {
-                  className: "flex w-40 sm:w-48 md:w-56 lg:w-64 h-10 sm:h-11 md:h-12 px-4 sm:px-6 items-center justify-center rounded-[4px]  bg-[#D4AF37] text-[#1B1B1B] font-montserrat font-medium text-sm sm:text-base md:text-lg cursor-pointer transition-all duration-200 hover:opacity-100 hover:scale-105 relative before:absolute before:inset-[-3px] before:rounded-full before:z-[-1] before:brightness-100 before:contrast-125",
-                  onClick: () => handleUserTypeClick("creator"),
-                  children: "Creator"
-                }
-              )
-            ] }),
+            }
+          )
+        ] })
+      ] }) }),
+      /* @__PURE__ */ jsx("div", { className: "mb-10", children: /* @__PURE__ */ jsx("p", { className: "text-white font-source-sans-pro font-light text-sm sm:text-sm leading-relaxed m-0 text-center w-full max-w-[620px] px-4", children: "Lawvriksh isn't just a platform—it's your breakthrough. Dive into the law with passion and purpose, turning curiosity into confidence and letting your voice amplify justice. Share your work, build a powerful digital presence, and join a movement where every insight sparks change. This is where learners rise, leaders shine, and your impact begins." }) }),
+      /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center gap-6 max-w-fit w-full", children: [
+        /* @__PURE__ */ jsx("h2", { className: "bg-gold-texture bg-cover bg-center bg-clip-text text-transparent font-montserrat font-normal text-xl sm:text-2xl md:text-3xl leading-tight m-0 text-center w-full px-4", children: "Join Our Waiting List :" }),
+        /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center gap-5 w-full", children: [
+          /* @__PURE__ */ jsxs("div", { className: "flex flex-row items-center gap-3 sm:gap-4 justify-center w-full", children: [
             /* @__PURE__ */ jsx(
               "button",
               {
-                className: "flex w-40 sm:w-48 md:w-56 lg:w-64 h-10 sm:h-11 md:h-12 px-4 sm:px-6 items-center justify-center rounded-[4px] bg-[#1B1B1B]  text-[#D4AF37] font-montserrat font-medium text-sm sm:text-base md:text-lg cursor-pointer transition-all duration-200 hover:opacity-80 hover:scale-105",
-                onClick: handleNotInterestedClick,
-                children: "Not found Interest"
+                className: "flex w-40 sm:w-48 md:w-56 lg:w-64 h-10 sm:h-11 md:h-12 px-4 sm:px-6 items-center justify-center rounded-[4px]  bg-[#D4AF37] text-[#1B1B1B] font-montserrat font-medium text-sm sm:text-base md:text-lg cursor-pointer transition-all duration-200 hover:opacity-100 hover:scale-105 relative before:absolute before:inset-[-3px] before:rounded-full before:z-[-1] before:brightness-100 before:contrast-125",
+                onClick: () => handleUserTypeClick("user"),
+                children: "User"
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              "button",
+              {
+                className: "flex w-40 sm:w-48 md:w-56 lg:w-64 h-10 sm:h-11 md:h-12 px-4 sm:px-6 items-center justify-center rounded-[4px]  bg-[#D4AF37] text-[#1B1B1B] font-montserrat font-medium text-sm sm:text-base md:text-lg cursor-pointer transition-all duration-200 hover:opacity-100 hover:scale-105 relative before:absolute before:inset-[-3px] before:rounded-full before:z-[-1] before:brightness-100 before:contrast-125",
+                onClick: () => handleUserTypeClick("creator"),
+                children: "Creator"
               }
             )
-          ] })
-        ] })
-      ] }) }),
-      /* @__PURE__ */ jsx(
-        "button",
-        {
-          onClick: handleFeaturesClick,
-          className: "fixed bottom-6 right-6 z-40 w-14 h-14 bg-gradient-to-r from-law-gold to-law-gold/90 text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center group",
-          "aria-label": "View Features",
-          children: /* @__PURE__ */ jsx(
-            "svg",
+          ] }),
+          /* @__PURE__ */ jsx(
+            "button",
             {
-              className: "w-6 h-6 transition-transform group-hover:rotate-12",
-              fill: "currentColor",
-              viewBox: "0 0 24 24",
-              children: /* @__PURE__ */ jsx("path", { d: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" })
+              className: "flex w-48 sm:w-48 md:w-56 lg:w-64 h-10 sm:h-11 md:h-12 px-4 sm:px-6 items-center justify-center rounded-[4px] bg-[#1B1B1B]  text-[#D4AF37] font-montserrat font-medium text-sm sm:text-base md:text-lg cursor-pointer transition-all duration-200 hover:opacity-80 hover:scale-105",
+              onClick: handleNotInterestedClick,
+              children: "Not found Interest"
             }
           )
-        }
-      ),
-      /* @__PURE__ */ jsx(
-        Popup,
-        {
-          isOpen: showPopup,
-          onClose: closePopup,
-          type: popupType,
-          userType,
-          isNotInterested,
-          feedbackSubmitted,
-          onUserTypeClick: handleUserTypeClick,
-          onNotInterestedClick: handleNotInterestedClick,
-          onFeaturesClick: handleFeaturesClick,
-          onFeedbackClick: handleFeedbackClick,
-          onAdminClick: handleAdminClick
-        }
-      )
-    ] }),
+        ] })
+      ] })
+    ] }) }),
     /* @__PURE__ */ jsx(
-      "a",
+      "button",
       {
-        href: "/admin",
-        className: "fixed bottom-4 right-4 text-xs text-gray-500 hover:text-blue-600 underline z-50",
-        style: { pointerEvents: "auto" },
-        children: "Admin"
+        onClick: handleFeaturesClick,
+        className: "fixed bottom-6 right-6 z-40 w-14 h-14 bg-gradient-to-r from-law-gold to-law-gold/90 text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center group",
+        "aria-label": "View Features",
+        children: /* @__PURE__ */ jsx(
+          "svg",
+          {
+            className: "w-6 h-6 transition-transform group-hover:rotate-12",
+            fill: "currentColor",
+            viewBox: "0 0 24 24",
+            children: /* @__PURE__ */ jsx("path", { d: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" })
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      Popup,
+      {
+        isOpen: showPopup,
+        onClose: closePopup,
+        type: popupType,
+        userType,
+        isNotInterested,
+        feedbackSubmitted,
+        onUserTypeClick: handleUserTypeClick,
+        onNotInterestedClick: handleNotInterestedClick,
+        onFeaturesClick: handleFeaturesClick,
+        onFeedbackClick: handleFeedbackClick,
+        onAdminClick: handleAdminClick
       }
     )
-  ] });
+  ] }) });
 }
 const meta$1 = () => {
   return [
@@ -3038,7 +3029,7 @@ const route2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   default: Admin,
   meta
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-BNGMPvA7.js", "imports": ["/assets/index-YvRzHH_e.js", "/assets/components-j0a9_KZH.js", "/assets/analytics-COkimW_x.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-CkfX76o3.js", "imports": ["/assets/index-YvRzHH_e.js", "/assets/components-j0a9_KZH.js", "/assets/analytics-COkimW_x.js"], "css": ["/assets/root-DPDgeJhj.css"] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-BmFwic9m.js", "imports": ["/assets/index-YvRzHH_e.js", "/assets/hooks-CdeIljhn.js", "/assets/analytics-COkimW_x.js"], "css": [] }, "routes/admin": { "id": "routes/admin", "parentId": "root", "path": "admin", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/admin-CX1QlZ_A.js", "imports": ["/assets/index-YvRzHH_e.js", "/assets/hooks-CdeIljhn.js"], "css": [] } }, "url": "/assets/manifest-18d95d0e.js", "version": "18d95d0e" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-BNGMPvA7.js", "imports": ["/assets/index-YvRzHH_e.js", "/assets/components-j0a9_KZH.js", "/assets/analytics-COkimW_x.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-B1gELwDd.js", "imports": ["/assets/index-YvRzHH_e.js", "/assets/components-j0a9_KZH.js", "/assets/analytics-COkimW_x.js"], "css": ["/assets/root-2EnMbtB_.css"] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-DjhCkfMO.js", "imports": ["/assets/index-YvRzHH_e.js", "/assets/hooks-CdeIljhn.js", "/assets/analytics-COkimW_x.js"], "css": ["/assets/_index-DUVZix68.css"] }, "routes/admin": { "id": "routes/admin", "parentId": "root", "path": "admin", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/admin-CX1QlZ_A.js", "imports": ["/assets/index-YvRzHH_e.js", "/assets/hooks-CdeIljhn.js"], "css": [] } }, "url": "/assets/manifest-7f0a48e4.js", "version": "7f0a48e4" };
 const mode = "production";
 const assetsBuildDirectory = "build\\client";
 const basename = "/";

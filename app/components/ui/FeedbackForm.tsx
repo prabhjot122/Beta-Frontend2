@@ -4,6 +4,7 @@ import type { FeedbackFormData } from "~/lib/types";
 import { RATING_SCALE, RATING_LABELS, YES_NO_OPTIONS, AI_TOOLS_FREQUENCY_OPTIONS } from "~/lib/types";
 import { useFeedbackSubmission } from "~/lib/hooks";
 import { useAnalytics } from "~/lib/useAnalytics";
+import './rating-radio.css';
 
 interface FeedbackFormProps {
   onClose: () => void;
@@ -131,15 +132,11 @@ export function FeedbackForm({ onClose, onSuccess }: FeedbackFormProps) {
       <label className="block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm">
         {questionNumber}. {label}
       </label>
-      <div className="flex gap-4 flex-wrap mb-3">
+      <div className="custom-rating-radio-group">
         {RATING_SCALE.map(num => (
           <label
             key={num}
-            className={`flex items-center gap-1 cursor-pointer text-sm transition-all backdrop-blur-sm rounded-lg px-2 py-1 border ${
-              formData[name as keyof FeedbackFormData] === num
-                ? 'bg-law-gold/20 border-law-gold/50 text-yellow-300 font-semibold shadow-lg'
-                : 'text-white/80 hover:text-white bg-white/5 border-white/10 hover:bg-white/10'
-            }`}
+            className={`custom-rating-radio${formData[name as keyof FeedbackFormData] === num ? ' selected' : ''}`}
           >
             <input
               type="radio"
@@ -147,9 +144,9 @@ export function FeedbackForm({ onClose, onSuccess }: FeedbackFormProps) {
               value={num.toString()}
               checked={formData[name as keyof FeedbackFormData] === num}
               onChange={handleInputChange}
-              className="w-4 h-4"
+              className="custom-rating-radio-input"
             />
-            <span className="font-medium">{num} - {RATING_LABELS[num as keyof typeof RATING_LABELS]}</span>
+            <span className="custom-rating-radio-label">{num} - {RATING_LABELS[num as keyof typeof RATING_LABELS]}</span>
           </label>
         ))}
       </div>
@@ -216,24 +213,26 @@ export function FeedbackForm({ onClose, onSuccess }: FeedbackFormProps) {
           {renderRatingQuestion('digital_work_showcase_effectiveness', 'How effectively are you able to showcase your digital work online?', 1)}
 
           <div className={POPUP_STYLES.formGroup}>
-            <label className="block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm">
-              2. Do you think legal persons are getting enough recognition online?
-            </label>
-            <div className="flex gap-4 flex-wrap mb-3">
-              {YES_NO_OPTIONS.map(option => (
-                <label key={option.value} className="flex items-center gap-1 cursor-pointer text-sm text-white/80 hover:text-white transition-colors bg-white/5 backdrop-blur-sm rounded-lg px-2 py-1 border border-white/10 hover:bg-white/10">
-                  <input
-                    type="radio"
-                    name="legal_persons_online_recognition"
-                    value={option.value}
-                    checked={formData.legal_persons_online_recognition === option.value}
-                    onChange={handleInputChange}
-                    className="w-4 h-4"
-                  />
-                  <span>{option.label}</span>
-                </label>
-              ))}
-            </div>
+            <fieldset>
+              <legend className="block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm">
+                2. Do you think legal persons are getting enough recognition online?
+              </legend>
+              <div className="flex gap-4 flex-wrap mb-3">
+                {YES_NO_OPTIONS.map(option => (
+                  <label key={option.value} className="flex items-center gap-1 cursor-pointer text-sm text-white/80 hover:text-white transition-colors bg-white/5 backdrop-blur-sm rounded-lg px-2 py-1 border border-white/10 hover:bg-white/10">
+                    <input
+                      type="radio"
+                      name="legal_persons_online_recognition"
+                      value={option.value}
+                      checked={formData.legal_persons_online_recognition === option.value}
+                      onChange={handleInputChange}
+                      className="w-4 h-4"
+                    />
+                    <span>{option.label}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
           </div>
 
           {renderRatingQuestion('digital_work_sharing_difficulty', 'What level of difficulty do you face while sharing your digital work online? (1: Least, 5: Most)', 3)}
@@ -246,45 +245,49 @@ export function FeedbackForm({ onClose, onSuccess }: FeedbackFormProps) {
           </h3>
 
           <div className={POPUP_STYLES.formGroup}>
-            <label className="block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm">
-              4. Do you write blogs regularly?
-            </label>
-            <div className="flex gap-4 flex-wrap mb-3">
-              {YES_NO_OPTIONS.map(option => (
-                <label key={option.value} className="flex items-center gap-1 cursor-pointer text-sm text-white/80 hover:text-white transition-colors bg-white/5 backdrop-blur-sm rounded-lg px-2 py-1 border border-white/10 hover:bg-white/10">
-                  <input
-                    type="radio"
-                    name="regular_blogging"
-                    value={option.value}
-                    checked={formData.regular_blogging === option.value}
-                    onChange={handleInputChange}
-                    className="w-4 h-4"
-                  />
-                  <span>{option.label}</span>
-                </label>
-              ))}
-            </div>
+            <fieldset>
+              <legend className="block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm">
+                4. Do you write blogs regularly?
+              </legend>
+              <div className="flex gap-4 flex-wrap mb-3">
+                {YES_NO_OPTIONS.map(option => (
+                  <label key={option.value} className="flex items-center gap-1 cursor-pointer text-sm text-white/80 hover:text-white transition-colors bg-white/5 backdrop-blur-sm rounded-lg px-2 py-1 border border-white/10 hover:bg-white/10">
+                    <input
+                      type="radio"
+                      name="regular_blogging"
+                      value={option.value}
+                      checked={formData.regular_blogging === option.value}
+                      onChange={handleInputChange}
+                      className="w-4 h-4"
+                    />
+                    <span>{option.label}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
           </div>
 
           <div className={POPUP_STYLES.formGroup}>
-            <label className="block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm">
-              5. How often do you use AI tools to assist in writing blogs?
-            </label>
-            <div className="flex gap-4 flex-wrap mb-3">
-              {AI_TOOLS_FREQUENCY_OPTIONS.map(option => (
-                <label key={option.value} className="flex items-center gap-1 cursor-pointer text-sm text-white/80 hover:text-white transition-colors bg-white/5 backdrop-blur-sm rounded-lg px-2 py-1 border border-white/10 hover:bg-white/10">
-                  <input
-                    type="radio"
-                    name="ai_tools_blogging_frequency"
-                    value={option.value}
-                    checked={formData.ai_tools_blogging_frequency === option.value}
-                    onChange={handleInputChange}
-                    className="w-4 h-4"
-                  />
-                  <span>{option.label}</span>
-                </label>
-              ))}
-            </div>
+            <fieldset>
+              <legend className="block font-medium text-sm text-white/90 mb-3 font-montserrat drop-shadow-sm">
+                5. How often do you use AI tools to assist in writing blogs?
+              </legend>
+              <div className="flex gap-4 flex-wrap mb-3">
+                {AI_TOOLS_FREQUENCY_OPTIONS.map(option => (
+                  <label key={option.value} className="flex items-center gap-1 cursor-pointer text-sm text-white/80 hover:text-white transition-colors bg-white/5 backdrop-blur-sm rounded-lg px-2 py-1 border border-white/10 hover:bg-white/10">
+                    <input
+                      type="radio"
+                      name="ai_tools_blogging_frequency"
+                      value={option.value}
+                      checked={formData.ai_tools_blogging_frequency === option.value}
+                      onChange={handleInputChange}
+                      className="w-4 h-4"
+                    />
+                    <span>{option.label}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
           </div>
 
           {renderRatingQuestion('blogging_tools_familiarity', 'How familiar are you with different blogging tools available in the market?', 6)}

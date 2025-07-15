@@ -115,7 +115,7 @@ export function Popup({
       <div
         className={`${POPUP_STYLES.container} ${POPUP_STYLES.containerBorder} ${
           isLargePopup ? 'max-w-4xl max-h-[95vh] sm:max-h-[90vh]' : ''
-        }`}
+        } max-h-[70vh] sm:max-h-[90vh] overflow-y-auto`}
         onClick={(e) => e.stopPropagation()}
         role="presentation"
         tabIndex={-1}
