@@ -74,7 +74,7 @@ export const BACKEND_CONFIG = {
 } as const;
 
 // API Base URL (constructed from backend config)
-export const API_BASE_URL = `https://lawvriksh.com`;
+export const API_BASE_URL = `https://beta.lawvriksh.com`;
 
 // API endpoints matching FastAPI backend routes
 export const API_ENDPOINTS = {
