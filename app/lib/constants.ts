@@ -112,9 +112,9 @@ export const API_ENDPOINTS = {
 
 // Local storage keys
 export const STORAGE_KEYS = {
-  ADMIN_TOKEN: 'lawvriksh_admin_token',
-  USER_PREFERENCES: 'lawvriksh_user_preferences',
-  FORM_DRAFTS: 'lawvriksh_form_drafts'
+  ADMIN_TOKEN: 'beta_lawvriksh_admin_token',
+  USER_PREFERENCES: 'beta_lawvriksh_user_preferences',
+  FORM_DRAFTS: 'beta_lawvriksh_form_drafts'
 } as const;
 
 // Error messages
